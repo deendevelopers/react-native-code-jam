@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-ionicons';
 
-function TodoItem({text, onComplete, onDelete}) {
+function TodoItem({text, onComplete, onDelete, completed}) {
   return (
     <View style={styles.container}>
       <View styles={styles.item}>
@@ -11,7 +11,11 @@ function TodoItem({text, onComplete, onDelete}) {
       <View style={styles.actions}>
         <View style={styles.spacer}>
           <TouchableWithoutFeedback onPress={onComplete}>
-            <Icon name="checkbox-outline" size={28} color={'#000000'} />
+            <Icon
+              name={completed ? 'checkbox' : 'checkbox-outline'}
+              size={28}
+              color={'#000000'}
+            />
           </TouchableWithoutFeedback>
         </View>
         <View>

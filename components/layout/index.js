@@ -1,12 +1,10 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 
 function Layout({children}) {
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <ScrollView style={styles.scrollView}>{children}</ScrollView>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>{children}</ScrollView>
     </SafeAreaView>
   );
 }

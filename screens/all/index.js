@@ -3,61 +3,29 @@ import {Alert, StyleSheet} from 'react-native';
 
 import Layout from '../../components/layout';
 import TodoItem from '../../components/todo-item';
+import useTodos from '../../hooks/use-todos';
 
 function All() {
-  function onCompletePress() {
-    Alert.alert(
-      'Complete Press',
-      'You pressed the complete button',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ],
-      {cancelable: true},
-    );
-  }
-
-  function onDeletePress() {
-    Alert.alert(
-      'Delete Press',
-      'You pressed the delete button',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ],
-      {cancelable: true},
-    );
-  }
+  const {todos, remove, update} = useTodos();
 
   return (
     <Layout>
-      <TodoItem
-        text="Make sure to read before going to bed"
-        onComplete={onCompletePress}
-        onDelete={onDeletePress}
-      />
-      <TodoItem
-        text="Make sure to read before going to bed"
-        onComplete={onCompletePress}
-        onDelete={onDeletePress}
-      />
-      <TodoItem
-        text="Make sure to read before going to bed"
-        onComplete={onCompletePress}
-        onDelete={onDeletePress}
-      />
+      {todos.map((todo) => {
+        if (!todo.completed) {
+          return (
+            <TodoItem
+              key={todo.id}
+              text={todo.label}
+              onComplete={() => remove(todo.id)}
+              onDelete={() => update(todo.id)}
+              completed={todo.completed}
+            />
+          );
+        }
+        return null;
+      })}
     </Layout>
   );
 }
-
-const styles = StyleSheet.create({});
 
 export default All;
